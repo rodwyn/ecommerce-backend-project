@@ -1,0 +1,32 @@
+<form method="post">
+  <div class="row">
+    <div class="col">
+      <button hidden>Autosave</button>
+      <button class="btn btn-success" name="new" value="true">New</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      {{#if product.length}}
+        <ul class="list-group">
+          {{#each product}}
+            <li class="list-group-item d-flex align-items-center">
+              <input
+                class="form-control mx-2"
+                name="product[{{@index}}][text]"
+                onchange="this.form.submit()"
+                value="{{this.text}}"
+              />
+              <button
+                class="btn btn-danger"
+                name="remove"
+                value="{{@index}}">Remove</button>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <h5>Your product list is empty</h5>
+      {{/if}}
+    </div>
+  </div>
+</form>
