@@ -1,18 +1,26 @@
 const express = require('express')
 const router = express.Router()
 
-let product = []
+const productsByUser = {};
 
 router.post('/', (req, res, next) => {
-  product = [...req.body.product || []]
+  const product = [...req.body.product || []]
   if (req.body.remove) product.splice(req.body.remove, 1)
   if (req.body.new) product.push({})
+
+  productsByUser[req.userContext.userinfo.sub] = product
 
   next()
 })
 
 router.use('/', (req, res) => {
-  res.render('product', { title: 'Product list', product })
+  const product =  productsByUser[req.userContext.userinfo.sub] || []
+
+  res.render('product', {
+    title: 'Product list',
+    product,
+    userinfo: req.userContext.userinfo
+  })
 })
 
 module.exports = router
