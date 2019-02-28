@@ -8,6 +8,14 @@
   </head>
   <body>
     <h1>{{title}}</h1>
+    {{#if userinfo}}
+      <h4>
+        Welcome back, {{userinfo.given_name}}!
+        <small>
+          <a href="/logout">Click here to logout</a>
+        </small>
+      </h4>
+    {{/if}}
     <main>
       {{{body}}}
     </main>
