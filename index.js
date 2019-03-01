@@ -4,18 +4,32 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
-
-const productRouter = require('./product');
-
 const oidc = new ExpressOIDC({
 	issuer: `${process.env.OKTA_ORG_URL}/oauth2/default`,
 	client_id: process.env.OKTA_CLIENT_ID,
 	client_secret: process.env.OKTA_CLIENT_SECRET,
 	redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
 	scope: 'openid profile'
-})
+});
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+
+// Routes
+const productRouter = require('./product');
 
 const app = express();
+const dbRoute = process.env.MONGO_URI;
+
+mongoose.connect(
+	dbRoute,
+	{ useNewUrlParser: true }
+);
+
+let db = mongoose.connection;
+
+db.once('open', () => console.log('Conneted to the database'));
+db.on('error', console.error.bind('Mongo connection error:'));
 
 app.use(session({
 	secret: process.env.APP_SECRET,
