@@ -29,6 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(express.urlencoded({ extended: true }));
+app.use('/', oidc.ensureAuthenticated());
 app.use('/product', oidc.ensureAuthenticated(), productRouter);
 
 app.get('/logout', (req, res) => {
@@ -48,8 +49,8 @@ app.get('/', (req, res) => {
 
 	res.render('index', {
 		userinfo,
-		title: 'Hello, world!',
-		content: 'How are you?'
+		title: 'Dashboard',
+		content: 'Dashboard'
 	})
 });
 

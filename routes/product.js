@@ -17,7 +17,7 @@ router.use('/', (req, res) => {
   const product =  productsByUser[req.userContext.userinfo.sub] || []
 
   res.render('product', {
-    title: 'Product list',
+    title: 'Products',
     product,
     userinfo: req.userContext.userinfo
   })
