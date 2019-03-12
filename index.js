@@ -7,7 +7,10 @@ const dbRoute = process.env.MONGO_URI;
 
 mongoose.connect(
 	dbRoute,
-	{ useNewUrlParser: true }
+	{
+		useNewUrlParser: true,
+		useCreateIndex: true
+	}
 );
 
 let db = mongoose.connection;
