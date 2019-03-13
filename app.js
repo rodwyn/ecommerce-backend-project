@@ -38,8 +38,9 @@ app.use(function(req, res, next) {
    next();
  });
 
-app.use('/', oidc.ensureAuthenticated());
-app.use('/product', oidc.ensureAuthenticated(), productRouter);
+// app.use('/', oidc.ensureAuthenticated());
+// app.use('/product', oidc.ensureAuthenticated(), productRouter);
+app.use('/product', productRouter)
 
 app.get('/logout', (req, res) => {
 	if (req.userContext) {

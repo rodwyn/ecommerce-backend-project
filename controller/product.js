@@ -22,7 +22,7 @@ exports.createProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  products.get({}, (error, products) => {
+  Products.get({}, (error, products) => {
     if (error) {
       res.json({
         error: error
@@ -35,7 +35,7 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getProduct = (req, res, next) => {
-  Products.get({_id: req.params.id}, (error, products) => {
+  Products.get({description: req.params.id}, (error, products) => {
     if (error) {
       res.json({
         error: error

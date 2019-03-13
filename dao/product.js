@@ -2,21 +2,21 @@ const mongoose = require('mongoose');
 const productSchema = require('../model/product');
 
 productSchema.statics = {
-  create: (data, cb) => {
+  create: function (data, cb) {
     const product = new this(data);
 
     product.save(cb);
   },
-  get: (query, cb) => {
+  get: function (query, cb) {
     this.find(query, cb);
   },
-  getByName: (query, cb) => {
+  getByName: function (query, cb) {
     this.find(query, cb);
   },
-  update: (query, updateData, cb) => {
+  update: function (query, updateData, cb) {
     this.findOneAndUpdate(query, { $set: updateData }, { new: true }, cb);
   },
-  delete: (query, cb) => {
+  delete: function (query, cb) {
     this.findOneAndDelete(query, cb);
   }
 };
