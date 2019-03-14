@@ -4,7 +4,7 @@
   "description": "e-Commerce backend project.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js --exec babel-node --presets babel-preset-env"
+    "start": "nodemon app.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -28,10 +28,10 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.0.0-rc.1",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/node": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
     "nodemon": "^1.18.4"
   }
 }
