@@ -1,26 +1,21 @@
 const express = require('express')
 const router = express.Router()
+const Products = require('../controller/product');
 
-const productsByUser = {};
+// router.use('/', (req, res) => {
+//   const product = [];
+//
+//   res.render('product', {
+//     title: 'Products',
+//     product,
+//     userinfo: ''
+//   })
+// })
 
-router.post('/', (req, res, next) => {
-  const product = [...req.body.product || []]
-  if (req.body.remove) product.splice(req.body.remove, 1)
-  if (req.body.new) product.push({})
-
-  productsByUser[req.userContext.userinfo.sub] = product
-
-  next()
-})
-
-router.use('/', (req, res) => {
-  const product =  productsByUser[req.userContext.userinfo.sub] || []
-
-  res.render('product', {
-    title: 'Products',
-    product,
-    userinfo: req.userContext.userinfo
-  })
-})
+router.post('/create', Products.createProduct);
+router.get('/get', Products.getProducts);
+router.get('/get/:id', Products.getProduct);
+router.put('/update/:id', Products.updateProduct);
+router.delete('/remove/:id', Products.removeProduct);
 
 module.exports = router
