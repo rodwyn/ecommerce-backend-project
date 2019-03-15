@@ -16,11 +16,16 @@ app.use(express.json());
 app.use(CORS.handleCors);
 app.use(bodyParser.json());
 app.use('/api', restRouter);
-app.use(notFound);
-app.use(error);
+// app.use(notFound);
+// app.use(error);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-	res.send('hello world');
+	res.render('index', {
+		title: 'Hello World',
+		content: 'How are you?'
+	});
 });
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`))
