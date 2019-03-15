@@ -14,22 +14,11 @@ export default {
     }
   },
   async findProducts (req, res) {
-    try {
-      const products = await Product.find();
-      return res.send({ message: SUCCESS, data: products});
-    } catch (error) {
-      return res.status(500).send(error);
-    }
-  },
-  async findProduct (req, res) {
-    try {
-      const foundProduct = await Product.findOne({ _id: req.body.id });
+    const query = (req.body.id) ? { _id: req.body.id } : {};
 
-      if (foundProduct) {
-        return res.send({ message: SUCCESS, data: foundProduct});
-      } else {
-        returnres.send({ message: NOT_FOUND });
-      }
+    try {
+      const products = await Product.find(query);
+      return res.send({ message: SUCCESS, data: products});
     } catch (error) {
       return res.status(500).send(error);
     }
@@ -59,7 +48,7 @@ export default {
   },
   async deleteProduct (req, res) {
     try {
-      const deletedProduct = await Product.findByIdAndRemove(req.query.id);
+      const deletedProduct = await Product.findByIdAndRemove(req.body.id);
 
       if (deletedProduct) {
         return res.send({ message: SUCCESS });
