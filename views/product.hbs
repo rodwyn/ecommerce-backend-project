@@ -8,24 +8,33 @@
   </div>
   <div class="row mt-3">
     <div class="col">
-      {{product}}
       {{#if product.length}}
-        <ul class="list-group">
-          {{#each product}}
-            <li class="list-group-item d-flex align-items-center">
-              <input
-                class="form-control mx-2"
-                name="product[{{@index}}][text]"
-                onchange="this.form.submit()"
-                value="{{this.text}}"
-              />
-              <button
-                class="btn btn-danger"
-                name="remove"
-                value="{{@index}}">Remove</button>
-            </li>
-          {{/each}}
-        </ul>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Stock</th>
+              <th scope="col">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each product}}
+              <tr>
+                <th scope="row">{{this.description}}</th>
+                <td>{{this.price}}</td>
+                <td>{{this.rate}}</td>
+                <td>{{this.stock}}</td>
+                <td>
+                  <a class="btn btn-link" href="edit/{{this._id}}" role="button">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
       {{else}}
         <h5>Your product list is empty</h5>
       {{/if}}

@@ -29,6 +29,22 @@ app.get('/', (req, res) => {
 	});
 });
 
+app.get('/edit/:id', (req, res) => {
+	async function getProduct() {
+		const response = await fetch(`http://localhost:3000/api/product/?id=${req.params.id}`);
+		const data = await response.json();
+		return data;
+	}
+
+	const product = getProduct();
+	product.then(data => {
+		res.render('edit', {
+			title: 'Edit product',
+			product: data.data
+		});
+	});
+});
+
 app.get('/product', (req, res) => {
 	async function getProducts() {
 		const response = await fetch('http://localhost:3000/api/product/');
@@ -38,8 +54,6 @@ app.get('/product', (req, res) => {
 
 	const product = getProducts();
 	product.then(data => {
-		console.log(data.data);
-		console.log(data.message);
 		res.render('product', {
 	    title: 'Product list',
 	    product: data.data

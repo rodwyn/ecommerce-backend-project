@@ -14,7 +14,7 @@ export default {
     }
   },
   async findProducts (req, res) {
-    const query = (req.body.id) ? { _id: req.body.id } : {};
+    const query = (req.query.id) ? { _id: req.query.id } : {};
 
     try {
       const products = await Product.find(query);
