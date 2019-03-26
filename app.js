@@ -6,6 +6,7 @@ import notFound from './middleware/notFound';
 import error from './middleware/error';
 import { restRouter } from './api';
 import bodyParser from 'body-parser';
+import fetch from 'node-fetch';
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +26,24 @@ app.get('/', (req, res) => {
 	res.render('index', {
 		title: 'Hello World',
 		content: 'How are you?'
+	});
+});
+
+app.get('/product', (req, res) => {
+	async function getProducts() {
+		const response = await fetch('http://localhost:3000/api/product/');
+		const data = await response.json();
+		return data;
+	}
+
+	const product = getProducts();
+	product.then(data => {
+		console.log(data.data);
+		console.log(data.message);
+		res.render('product', {
+	    title: 'Product list',
+	    product: data.data
+	  });
 	});
 });
 
