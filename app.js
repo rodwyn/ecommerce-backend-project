@@ -38,9 +38,12 @@ app.get('/edit/:id', (req, res) => {
 
 	const product = getProduct();
 	product.then(data => {
+		console.log(typeof(data.data[0]));
+		console.log(typeof(data.data));
+		console.log(typeof(data.message));
 		res.render('edit', {
 			title: 'Edit product',
-			product: data.data
+			product: data.data[0]
 		});
 	});
 });
