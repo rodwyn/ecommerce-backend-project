@@ -57,6 +57,7 @@ app.get('/product', (req, res) => {
 
 	const product = getProducts();
 	product.then(data => {
+		console.log(data.data);
 		res.render('product', {
 	    title: 'Product list',
 	    product: data.data
